@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+     {% load staticfiles %}
+    <script type="text/javascript" src="/static/myblog/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/myblog/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/myblog/style.css" />
+<script type="text/javascript" src="/static/myblog/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<div style="margin-top:1%;background-color: whitesmoke;height: 540px;width:650px ;margin-left:20%;border-radius: 20px;">
+
+  <div class="container-fluid">
+
+<div style="margin-left:13%;">
+    <h1 style="margin-left:17%;">Signup Here</h1>
+ <form role="form" action="/blog/signupcheck/"  method="post">
+     {% csrf_token %}
+  <div class="form-group col-xs-8">
+    <label >Firstname:</label>
+    <input type="text" class="form-control" name="first_name" id="first_name" required>
+  </div>
+  <div class="form-group col-xs-8">
+    <label >Lastname:</label>
+    <input type="text" class="form-control" name="last_name" id="last_name" required>
+  </div>
+  <div class="form-group col-xs-8">
+    <label> Email: </label>
+    <input type="email" class="form-control" name="email" id="email" required>
+  </div>
+  <div class="form-group col-xs-8">
+    <label> Password: </label>
+    <input type="password" class="form-control" name="password" id="password" required>
+  </div>
+<div class="form-group col-xs-8">
+    <label> Confirm Password: </label>
+    <input type="password" class="form-control" name="confirm_password" id="confirm_password" required>
+  </div>
+<div class="form-group col-xs-8">
+     <input class="btn btn-default" type="submit"  id="signup" value="Sign Up" />
+     <span style="background-color:white;margin-left:7%;">Already Having account <a href="/blog/login" >Login here</a></span>
+</div>
+ </form>
+        </div>
+
+  </div>
+ <div style="margin-left:23%;">
+    {% if error_message %}<p style="color:red;"><strong>{{ error_message }}</strong></p>
+{% endif %}
+ </div>
+    </div>
+
+<script>
+    /*
+$('#signup').on('click', function(){
+    var data = {
+        'first_name' : $('#first_name').val(),
+        'last_name' : $('#last_name').val(),
+        'email' : $('#email').val(),
+        'password' : $('#password').val(),
+        'confirm_password' : $('#confirm_password').val(),
+    }
+
+    console.log(data)
+    $.ajax({
+        'url':'/blog/signupcheck/',
+        'method':'post',
+        'data':data,
+        'success': function(response){
+            console.log("su"+response)
+            alert(response)
+        },
+        'error':function(re){
+            alert("er"+JSON.stringify(re))
+            console.log("error: "+re.responseText)
+        }
+    })
+
+});
+     $(function(){
+         $.ajaxSetup({
+            headers: { "X-CSRFToken": getCookie("csrftoken") }
+           });
+    function getCookie(c_name)
+       {
+           if (document.cookie.length > 0)
+           {
+               c_start = document.cookie.indexOf(c_name + "=");
+               if (c_start != -1)
+               {
+                   c_start = c_start + c_name.length + 1;
+                   c_end = document.cookie.indexOf(";", c_start);
+                   if (c_end == -1) c_end = document.cookie.length;
+                   return unescape(document.cookie.substring(c_start,c_end));
+               }
+           }
+           return "";
+       }
+     });*/
+</script>
+</body>
+
+
+</html>

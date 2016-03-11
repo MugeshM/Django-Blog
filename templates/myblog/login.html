@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+<link rel="stylesheet" type="text/css" href="/static/myblog/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/myblog/style.css" />
+<script type="text/javascript" src="/static/myblog/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/myblog/jquery.min.js"></script>
+
+</head>
+<body>
+<div style="margin-top:6%;background-color: whitesmoke;height: 300px;width:680px ;margin-left:20%;border-radius: 20px;">
+  <div class="container-fluid">
+
+<div style="margin-left:15%;">
+    <h1 style="margin-left:25%;">Login Here</h1>
+ <form role="form" action="/blog/logincheck/" method="post">
+     {% csrf_token %}
+  <div class="form-group col-xs-8">
+    <label >Email:</label>
+    <input type="text" class="form-control" name="user_name" required>
+  </div>
+  <div class="form-group col-xs-8">
+    <label> Password: </label>
+    <input type="password" class="form-control" name="user_pass" required>
+  </div>
+
+<div class="form-group col-xs-8">
+     <input class="btn btn-default" type="submit" value="Login" />
+     <span style="background-color:white;margin-left:10%;">Don't Have an account <a href="/blog/signup" >Sign up here</a></span>
+</div>
+ </form>
+
+
+        </div>
+
+  </div>
+ <div style="margin-left:24%;">
+    {% if error_message %}<p style="color:red;"><strong>{{ error_message }}</strong></p>
+{% endif %}
+ </div>
+<div style="margin-left:24%;">
+    {% if success_message %}<p style="color:green;"><strong>{{ success_message }}</strong></p>
+{% endif %}
+ </div>
+</div>
+</body>
+</html>

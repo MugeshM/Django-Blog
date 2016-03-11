@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Blog Index</title>
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="/static/myblog/bootstrap.min.css" />
+<script type="text/javascript" src="/static/myblog/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/myblog/jquery.min.js"></script>
+
+</head>
+<body style="background-color:#72edef">
+
+<div style="float:right;margin-right:20%;"><h4>Hi {{ request.user.first_name }}</h4> <a href="/blog/logout/" style="text-decoration:none;font-size:20px;background-color:#f2ede4;">Logout</a></div>
+
+<div class="container">
+    <h1>Latest posts</h1>
+{% if latest_posts %}
+    {% for post in latest_posts %}
+    <div style="margin-top:20px;margin-left:7%;background-color:#FFFFFF;border-radius:30px;padding:25px;box-shadow: 10px 10px 5px #888888;">
+        <h2>{{forloop.counter}}. <a href="{{  post.id}}">{{post.post_title }}</a> </h2>
+        <p><span class="glyphicon glyphicon-user"></span> : {{post.author_name  }}   |   <span class="glyphicon glyphicon-calendar"></span> {{post.posted_date}}</p>
+        <p>{{post.post_text}}</p>
+
+    </div>
+    {%endfor%}
+{% else %}
+    <p>No posts available to display.</p>
+{% endif %}
+    <div style="margin-top:30px;"><div style="margin-left:40%;"><a href="/blog/newpost/" style="text-decoration:none;font-size:20px;background-color:#f2ede4;">Post a new article</a></div></div>
+</div>
+</body>
+</html>

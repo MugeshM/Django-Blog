@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Post</title>
+
+<link rel="stylesheet" type="text/css" href="/static/myblog/bootstrap.min.css" />
+<script type="text/javascript" src="static/myblog/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/'myblog/jquery.min.js"></script>
+
+</head>
+<body style="background-color:#72edef">
+
+<div style="float:right;margin-right:20%;"><h4>Hi {{ request.session.user_name }}</h4> <a href="/blog/logout/" style="text-decoration:none;font-size:20px;background-color:#f2ede4;">Logout</a></div>
+
+<div class="container">
+    <div style="margin-left:20%;">
+    <h1>Create a New Article</h1>
+ <form role="form" action="/blog/post/" method="post">
+     {% csrf_token %}
+  <!--div class="form-group col-xs-8">
+    <label >Your name:</label>
+    <input type="text" class="form-control" name="author_name" required>
+  </div-->
+  <div class="form-group col-xs-8">
+    <label> Title of your article: </label>
+    <input type="text" class="form-control" name="article_title" required>
+  </div>
+  <div class="form-group col-xs-8">
+    <label> Article Content: </label>
+    <textarea class = "form-control" rows = "3" name="article_content" required></textarea>
+  </div>
+<div class="form-group col-xs-8">
+     <input class="btn btn-default" type="submit" value="Post" />
+</div>
+ </form>
+
+
+        </div>
+    <div>
+    {% if error_message %}<p style="color:red;"><strong>{{ error_message }}</strong></p>
+{% endif %}
+        </div>
+    </div>
+
+
+</body>
+</html>

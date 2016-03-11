@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ blogpost.post_title }}</title>
+    {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="/static/myblog/bootstrap.min.css" />
+<script type="text/javascript" src="/static/myblog/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/myblog/jquery.min.js"></script>
+</head>
+<body style="background-color:#72edef">
+
+<div style="float:right;margin-right:20%;"><h4>Hi {{ request.session.user_name }}</h4> <a href="/blog/logout/" style="text-decoration:none;font-size:20px;background-color:#f2ede4;">Logout</a></div>
+
+<div class="container">
+    <div style="margin-top:7%;margin-left:7%;background-color:#FFFFFF;border-radius:30px;padding:25px;box-shadow: 10px 10px 5px #888888;">
+<div>
+<h1>{{ blogpost.post_title }}</h1>
+<p><span class="glyphicon glyphicon-user"></span> : {{blogpost.author_name  }}   |   <span class="glyphicon glyphicon-calendar"></span> {{blogpost.posted_date}}</p>
+        <br><p>   {{blogpost.post_text}}</p>
+<br><br>
+</div>
+
+
+<h4>About Author :</h4>
+<div>
+    <img src="/static/images/auth.jpeg" height="90" width="90">
+    <span ><b style="color:#930;">   {{ blogpost.author_name }}</b> </span><br>
+    <span> Some Info about Author</span>
+</div>
+
+        <br>
+<h4>{{blogpost.blogcomments_set.count}} Comments :</h4>
+{% for comment in blogpost.blogcomments_set.all %}
+        <div style="margin-top:40px;">  <img src="/static/images/comm.jpeg" height="40" width="40">  <span ><b style="color:#930;"> {{ comment.comment_name }}</b> said ...</span>
+             <br> <span style="margin-left:50px;">{{ comment.comment }}</span>
+             <br> <span style="color:#930;">{{ comment.comment_date }}</span>
+        </div>
+{% endfor %}
+        <br>
+          <a style="margin-left:40%;font-size:18px;" id="commlink">Leave your comment</a>
+        <div>
+    {% if error_message %}<p style="color:red;"><strong>{{ error_message }}</strong></p>
+{% endif %}
+        </div>
+   <div id="commform" style="width:50%;margin-left:20%;">
+    <form role="form" action="/blog/{{ blogpost.id }}/postcomment/" method="post">
+        {% csrf_token %}
+        <!--div class="form-group">
+            <label >Your name:</label>
+            <input type="text" class="form-control" name="comm_name" required>
+        </div-->
+        <div class="form-group">
+            <label> Your comment: </label>
+            <textarea class = "form-control" rows = "3" name="comm_content" required></textarea>
+        </div>
+        <div class="form-group">
+            <input class="btn btn-default" type="submit" value="Post" />
+        </div>
+     </form>
+   </div>
+</div>
+    </div>
+</body>
+<script>
+    $("#commform").hide();
+    $("#commlink").on("click",function(){
+    //alert("hjhj");
+    $("#commform").slideDown();
+    $('body').scrollTo("input");
+    });
+</script>
+</html>
